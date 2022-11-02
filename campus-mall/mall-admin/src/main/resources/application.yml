@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: mall-admin
+  profiles:
+    active: dev
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+server:
+  servlet:
+    context-path: /manage
+
+
+secure:
+  ignored:
+    urls: # 安全路径白名单
+      - /swagger-ui/
+      - /swagger-resources/**
+      - /configuration/ui
+      - /webjars/**
+      - /**/v2/api-docs
+      - /**/*.html
+      - /**/*.js
+      - /**/*.css
+      - /**/*.png
+      - /**/*.map
+      - /favicon.ico
+      - /druid/**
+      - /actuator/**

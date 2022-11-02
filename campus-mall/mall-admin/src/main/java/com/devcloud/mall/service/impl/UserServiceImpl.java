@@ -1,0 +1,41 @@
+package com.devcloud.mall.service.impl;
+
+import cn.hutool.core.bean.BeanUtil;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.devcloud.mall.domain.User;
+import com.devcloud.mall.mapper.UserMapper;
+import com.devcloud.mall.service.UserService;
+import org.springframework.stereotype.Service;
+
+import java.util.Map;
+
+/**
+ * @author 吴员外
+ * @date 2022/10/31 21:27
+ */
+@Service
+public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements UserService {
+
+
+    @Override
+    public Map<String, Object> getUserList(Integer current, Integer limit) {
+        Page<User> page = new Page<>(current, limit);
+        baseMapper.selectPage(page, null);
+        Map<String, Object> map = BeanUtil.beanToMap(page, "records", "total", "size", "current");
+        map.put("hasNext", page.hasNext());
+        map.put("hasPrevious", page.hasPrevious());
+        return map;
+    }
+
+    @Override
+    public User getUserInfo(String id) {
+        return baseMapper.selectById(id);
+    }
+
+    @Override
+    public void forbiddenUser(User user) {
+        baseMapper.updateById(user);
+    }
+
+}

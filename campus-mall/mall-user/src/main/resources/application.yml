@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: mall-user
+  profiles:
+    active: prod
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+secure:
+  ignored:
+    urls: # 安全路径白名单
+      - /swagger-ui/
+      - /swagger-resources/**
+      - /configuration/ui
+      - /webjars/**
+      - /**/v2/api-docs
+      - /**/*.html
+      - /**/*.js
+      - /**/*.css
+      - /**/*.png
+      - /**/*.map
+      - /favicon.ico
+      - /druid/**
+      - /actuator/**
+      - /sms/**
+      - /user/register
+server:
+  servlet:
+    context-path: /shop
