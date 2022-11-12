@@ -2,4 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.devcloud.mall.mapper.GoodsMapper">
 
+    <select id="selectGoodsDetailById" resultType="com.devcloud.mall.domain.dto.GoodsDetailDto">
+        select
+            g.id,
+            g.user_Id as sellerId,
+            u.username as sellerName,
+            u.avatar,
+            g.name as goodsName,
+            g.price,
+            g.description,
+            g.image,
+            g.number,
+            g.view_count
+        from goods g
+        join user u on g.user_id = u.id
+        where g.id = #{id}
+    </select>
+
 </mapper>

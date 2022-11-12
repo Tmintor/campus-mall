@@ -29,7 +29,7 @@
         <druid.version>1.1.10</druid.version>
         <hutool.version>5.8.7</hutool.version>
         <swagger.version>2.6.0</swagger.version>
-        <mysql-connector.version>8.0.29</mysql-connector.version>
+        <mysql-connector.version>8.0.11</mysql-connector.version>
         <jjwt.version>0.9.1</jjwt.version>
         <aliyun-oss.version>3.1.0</aliyun-oss.version>
         <mybatis-plus.version>3.4.2</mybatis-plus.version>

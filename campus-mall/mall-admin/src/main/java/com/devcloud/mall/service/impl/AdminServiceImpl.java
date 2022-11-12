@@ -48,7 +48,7 @@ public class AdminServiceImpl implements AdminService {
         String userId = adminDetail.getAdmin().getId();
         String token = JwtUtil.createJWT(userId);
 
-        redisCache.setCacheObject(userId,adminDetail,1, TimeUnit.HOURS);
+        redisCache.setCacheObject(userId,adminDetail,8, TimeUnit.HOURS);
 
         return token;
     }

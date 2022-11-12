@@ -1,5 +1,6 @@
 package com.devcloud.mall.service.impl;
 
+import com.baomidou.mybatisplus.core.toolkit.Sequence;
 import com.devcloud.mall.domain.Category;
 import com.devcloud.mall.domain.dto.CategoryParentDto;
 import com.devcloud.mall.mapper.CategoryMapper;
@@ -24,14 +25,24 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
     @Autowired
     private CategoryMapper categoryMapper;
 
+    //ID生成器
+    @Autowired
+    private Sequence sequence;
+
     @Override
     public String addCategory(Category category) {
+        category.setId(sequence.nextId() + "");
         baseMapper.insert(category);
-        return null;
+        return category.getId();
     }
 
     @Override
     public List<CategoryParentDto> getAllCategory() {
         return categoryMapper.selectCategory();
+    }
+
+    @Override
+    public void modifyCategory(Category category) {
+        baseMapper.updateById(category);
     }
 }

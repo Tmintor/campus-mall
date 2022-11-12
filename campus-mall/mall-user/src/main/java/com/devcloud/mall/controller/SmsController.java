@@ -22,7 +22,6 @@ public class SmsController {
     @Autowired
     private SmsService smsService;
 
-
     @ApiOperation("获取注册验证码")
     @GetMapping("/code/{phone}")
     public R getVerificationCode(@PathVariable String phone) {

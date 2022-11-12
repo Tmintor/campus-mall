@@ -2,11 +2,19 @@ spring:
   application:
     name: mall-user
   profiles:
-    active: prod
+    active: dev
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
-
+server:
+  servlet:
+    context-path: /shop
+aliyun:
+  oss:
+    endpoint: oss-cn-guangzhou.aliyuncs.com
+    access-keyid: LTAI5tKzcuNvyr8HXizh7XkB
+    access-keysecret: 3l95gHC61TRFIXcYaHh6VJWPKXBLmR
+    bucketname: devcloud-campus-mall
 secure:
   ignored:
     urls: # 安全路径白名单
@@ -25,6 +33,5 @@ secure:
       - /actuator/**
       - /sms/**
       - /user/register
-server:
-  servlet:
-    context-path: /shop
+mybatis-plus:
+  mapper-locations: classpath*:/**/mapper/xml/*.xml

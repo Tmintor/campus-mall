@@ -30,7 +30,7 @@ import java.util.Date;
 @ApiModel(value="User对象", description="")
 @AllArgsConstructor
 @NoArgsConstructor
-public class User implements Serializable {
+public class    User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -48,6 +48,11 @@ public class User implements Serializable {
     @JsonIgnore
     private String password;
 
+    @ApiModelProperty(value = "用户头像")
+    private String avatar;
+
+    @ApiModelProperty("用户简介")
+    private String description;
 
     @ApiModelProperty(value = "性别")
     private Integer sex;

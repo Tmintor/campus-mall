@@ -2,14 +2,13 @@ spring:
   application:
     name: mall-admin
   profiles:
-    active: dev
+    active: prod
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
 server:
   servlet:
     context-path: /manage
-
 
 secure:
   ignored:

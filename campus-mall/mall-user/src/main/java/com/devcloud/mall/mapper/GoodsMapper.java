@@ -2,6 +2,7 @@ package com.devcloud.mall.mapper;
 
 import com.devcloud.mall.domain.Goods;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.devcloud.mall.domain.dto.GoodsDetailDto;
 
 /**
  * <p>
@@ -13,4 +14,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface GoodsMapper extends BaseMapper<Goods> {
 
+    GoodsDetailDto selectGoodsDetailById(String id);
 }

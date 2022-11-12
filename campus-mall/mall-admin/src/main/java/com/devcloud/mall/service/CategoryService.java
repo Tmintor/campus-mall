@@ -20,4 +20,5 @@ public interface CategoryService extends IService<Category> {
 
     List<CategoryParentDto> getAllCategory();
 
+    void modifyCategory(Category category);
 }

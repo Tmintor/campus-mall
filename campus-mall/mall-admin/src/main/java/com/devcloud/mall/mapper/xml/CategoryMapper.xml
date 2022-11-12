@@ -2,16 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.devcloud.mall.mapper.CategoryMapper">
     <resultMap id="categoryMap" type="com.devcloud.mall.domain.dto.CategoryParentDto">
-       <id property="id" column="id"/>
-       <result property="name" column="name"/>
-       <collection property="children" ofType="com.devcloud.mall.domain.dto.CategoryChildrenDto" javaType="list">
-           <id property="id" column="cid"/>
-           <result property="name" column="cname"/>
-       </collection>
-   </resultMap>
-   <select id="selectCategory" resultMap="categoryMap">
-       select a.id, a.name, b.id as cid, b.name as cname
-       from category a
-                join category b on a.id = b.parent_id
-   </select>
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <collection property="children" ofType="com.devcloud.mall.domain.dto.CategoryChildrenDto" javaType="list">
+            <id property="id" column="cid"/>
+            <result property="name" column="cname"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectCategory" resultMap="categoryMap">
+        select a.id, a.name, b.id as cid, b.name as cname
+        from category a
+                 left join category b on a.id = b.parent_id
+        where a.parent_id = ''
+           or a.parent_id is null
+    </select>
+
 </mapper>

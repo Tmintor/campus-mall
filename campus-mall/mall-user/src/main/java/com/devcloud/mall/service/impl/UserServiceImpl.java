@@ -81,6 +81,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         User user = new User();
         user.setUsername(username);
         user.setMobile(mobile);
+        user.setIsActive(1);
         user.setPassword(passwordEncoder.encode(registerVo.getPassword()));
         baseMapper.insert(user);
 
@@ -106,7 +107,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         //认证成功生成token，存放redis
         String userId = userDetail.getUser().getId();
         String token = JwtUtil.createJWT(userId);
-        redisCache.setCacheObject(userId,userDetail,1, TimeUnit.HOURS);
+        redisCache.setCacheObject(userId,userDetail,8, TimeUnit.HOURS);
 
         return token;
     }

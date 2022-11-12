@@ -47,6 +47,12 @@ public class User implements Serializable {
     @ApiModelProperty(value = "密码")
     private String password;
 
+    @ApiModelProperty(value = "用户头像")
+    private String avatar;
+
+    @ApiModelProperty(value = "用户简介")
+    private String description;
+
     @ApiModelProperty(value = "性别")
     private Integer sex;
 

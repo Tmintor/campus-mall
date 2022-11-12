@@ -1,0 +1,5 @@
+# Project exclude paths
+/campus-mall/mall-admin/target/
+/campus-mall/mall-common/target/
+/campus-mall/mall-security/target/
+/campus-mall/mall-user/target/
