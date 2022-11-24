@@ -29,4 +29,5 @@ public interface GoodsService extends IService<Goods> {
 
     void changeGoodsInfo(Goods goods);
 
+    Map<String, Object> getCategoryGoods(String cid, Integer page, Integer limit);
 }

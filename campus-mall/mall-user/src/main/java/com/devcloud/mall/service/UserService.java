@@ -26,4 +26,6 @@ public interface UserService extends IService<User> {
     String loginPhone(LoginPhoneVo loginPhoneVo);
 
     User getUserInfo(HttpServletRequest request);
+
+    User getUserInfoById(String id);
 }

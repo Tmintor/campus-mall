@@ -15,5 +15,7 @@ public class CategoryChildrenDto {
 
     private String name;
 
+    private String icon;
+
 
 }

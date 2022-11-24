@@ -1,7 +1,6 @@
 package com.devcloud.mall.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.devcloud.mall.domain.Goods;
 import com.devcloud.mall.domain.dto.GoodsDetailDto;
@@ -68,6 +67,15 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
     @Override
     public void changeGoodsInfo(Goods goods) {
         baseMapper.updateById(goods);
+    }
+
+    @Override
+    public Map<String, Object> getCategoryGoods(String cid, Integer current, Integer limit) {
+        Page<Goods> page = new Page<>(current, limit);
+        LambdaQueryWrapper<Goods> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.eq(Goods::getCateId, cid);
+        baseMapper.selectPage(page, lambdaQueryWrapper);
+        return BeanUtils.beanToPageMap(page);
     }
 
 }

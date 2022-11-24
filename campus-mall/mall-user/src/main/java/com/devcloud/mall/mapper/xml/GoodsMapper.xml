@@ -1,16 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.devcloud.mall.mapper.GoodsMapper">
+    
+    <resultMap id="GoodsDetailMap" type="com.devcloud.mall.domain.dto.GoodsDetailDto">
+        <id column="id" property="id"/>
+        <result property="sellerId" column="user_Id"/>
+        <result property="sellerName" column="username"/>
+        <result property="avatar" column="avatar"/>
+        <result property="goodsName" column="name"/>
+        <result property="price" column="price"/>
+        <result property="description" column="description"/>
+        <result property="attributes" column="attributes" typeHandler="com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler"/>
+        <result property="image" column="image"/>
+        <result property="number" column="number"/>
+        <result property="viewCount" column="view_count"/>
+    </resultMap>
 
-    <select id="selectGoodsDetailById" resultType="com.devcloud.mall.domain.dto.GoodsDetailDto">
+    <select id="selectGoodsDetailById" resultMap="GoodsDetailMap">
         select
             g.id,
-            g.user_Id as sellerId,
-            u.username as sellerName,
+            g.user_Id,
+            u.username,
             u.avatar,
-            g.name as goodsName,
+            g.name,
             g.price,
             g.description,
+           /* g.attributes,*/
             g.image,
             g.number,
             g.view_count

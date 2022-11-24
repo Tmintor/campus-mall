@@ -68,5 +68,13 @@ public class GoodsController {
         goodsService.changeGoodsInfo(goods);
         return R.ok();
     }
+
+    @ApiOperation("/查看二级分类下的商品")
+    @GetMapping("/list/{cid}/{page}/{limit}")
+    public R getCategoryGoods(@PathVariable String cid, @PathVariable Integer page, @PathVariable Integer limit) {
+        Map<String, Object> map = goodsService.getCategoryGoods(cid, page, limit);
+        return R.ok().data(map);
+    }
+
 }
 

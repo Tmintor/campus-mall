@@ -171,6 +171,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return userDetail.getUser().setPassword(null);
     }
 
+    @Override
+    public User getUserInfoById(String id) {
+        return baseMapper.selectById(id);
+    }
+
 
     //UserDetailService方法重写
     @Override

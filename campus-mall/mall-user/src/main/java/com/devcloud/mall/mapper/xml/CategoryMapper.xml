@@ -4,17 +4,19 @@
     <resultMap id="categoryMap" type="com.devcloud.mall.domain.dto.CategoryParentDto">
         <id property="id" column="id"/>
         <result property="name" column="name"/>
+        <result property="icon" column="icon"/>
         <collection property="children" ofType="com.devcloud.mall.domain.dto.CategoryChildrenDto" javaType="list">
             <id property="id" column="cid"/>
             <result property="pid" column="pid"/>
             <result property="name" column="cname"/>
+            <result property="icon" column="cicon"/>
         </collection>
     </resultMap>
 
     <select id="selectCategory" resultMap="categoryMap">
-        select a.id, a.name, b.id as cid, b.name as cname,b.parent_id as pid
+        select a.id, a.name, a.icon, b.id as cid, b.name as cname,b.parent_id as pid,b.icon as cicon
         from category a
-                 left join category b on a.id = b.parent_id
+        left join category b on a.id = b.parent_id
         where a.parent_id = ''
            or a.parent_id is null
     </select>

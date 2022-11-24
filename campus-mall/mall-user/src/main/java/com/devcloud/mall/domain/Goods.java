@@ -7,6 +7,8 @@ import com.baomidou.mybatisplus.annotation.*;
 import java.util.Date;
 
 import java.io.Serializable;
+import java.util.List;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -44,6 +46,9 @@ public class Goods implements Serializable {
 
     @ApiModelProperty(value = "商品描述")
     private String description;
+
+    /*@ApiModelProperty(value = "商家自定义的商品属性")
+    private String attributes;*/
 
     @ApiModelProperty(value = "商品图片地址")
     private String image;

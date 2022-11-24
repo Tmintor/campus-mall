@@ -1,5 +1,6 @@
 package com.devcloud.mall.domain.dto;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
@@ -14,6 +15,8 @@ public class CategoryChildrenDto {
     private String pid;
 
     private String name;
+
+    private String icon;
 
 
 }

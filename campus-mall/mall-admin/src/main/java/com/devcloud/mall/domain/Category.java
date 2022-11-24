@@ -39,6 +39,9 @@ public class Category implements Serializable {
     @ApiModelProperty(value = "分类名")
     private String name;
 
+    @ApiModelProperty(value = "图标")
+    private String icon;
+
     @ApiModelProperty(value = "创建时间")
     @TableField(fill = FieldFill.INSERT)
     private Date createTime;

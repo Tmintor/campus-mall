@@ -15,6 +15,8 @@ public class CategoryParentDto {
 
     private String name;
 
+    private String icon;
+
     private List<CategoryChildrenDto> children;
 
 }

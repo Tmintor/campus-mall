@@ -56,4 +56,19 @@ public class UserController {
         User user = userService.getUserInfo(request);
         return R.ok().data("userInfo", user);
     }
+
+    @ApiOperation("根据id获取用户信息")
+    @GetMapping("/userInfo/{id}")
+    public R getUserInfoById(@PathVariable String id) {
+        User user = userService.getUserInfoById(id);
+        return R.ok().data("userInfo", user);
+    }
+
+    @ApiOperation("修改个人信息")
+    @PutMapping("/userInfo")
+    public R modifyUserInfo(@RequestBody User user) {
+        userService.updateById(user);
+        return R.ok();
+    }
+
 }

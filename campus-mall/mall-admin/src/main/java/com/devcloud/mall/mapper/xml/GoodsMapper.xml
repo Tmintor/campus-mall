@@ -3,17 +3,24 @@
 <mapper namespace="com.devcloud.mall.mapper.GoodsMapper">
 
     <select id="selectPageByQuery" resultType="com.devcloud.mall.domain.dto.GoodsDto">
-        select g.id,g.name,g.user_id as userId,g.status,u.username from goods g
+        select
+            g.*,
+            g.user_id as userId,
+            g.status,
+            u.username
+        from goods g
         join user u on g.user_id = u.id
         <where>
-            <if test="goodsQuery.username != null and goodsQuery.username != ''">
-                u.username like CONCAT('%',#{goodsQuery.username},'%')
-            </if>
-            <if test="goodsQuery.goodsName != null and goodsQuery.goodsName != ''">
-                and g.name like CONCAT('%',#{goodsQuery.goodsName},'%')
-            </if>
-            <if test="goodsQuery.status != null">
-                and g.status = #{goodsQuery.status}
+            <if test="goodsQuery != null">
+                <if test="goodsQuery.username != null and goodsQuery.username != ''">
+                    u.username like CONCAT('%',#{goodsQuery.username},'%')
+                </if>
+                <if test="goodsQuery.goodsName != null and goodsQuery.goodsName != ''">
+                    and g.name like CONCAT('%',#{goodsQuery.goodsName},'%')
+                </if>
+                <if test="goodsQuery.status != null">
+                    and g.status = #{goodsQuery.status}
+                </if>
             </if>
         </where>
     </select>
