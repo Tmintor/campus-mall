@@ -176,6 +176,27 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return baseMapper.selectById(id);
     }
 
+    @Override
+    public void modifyUserInfo(User user) {
+        //更新用户信息
+        baseMapper.updateById(user);
+        //更新后需要从缓存中取出用户信息更新
+        UserDetail userDetail = redisCache.getCacheObject(user.getId());
+        User updateUser = baseMapper.selectById(user.getId());
+        userDetail.setUser(updateUser);
+        redisCache.setCacheObject(updateUser.getId(), userDetail);
+    }
+
+    @Override
+    @Transactional
+    public void updateAvatar(User user) {
+        baseMapper.updateById(user);
+        //更新缓存里的用户信息
+        UserDetail userDetail = redisCache.getCacheObject(user.getId());
+        userDetail.getUser().setAvatar(user.getAvatar());
+        redisCache.setCacheObject(user.getId(), userDetail);
+    }
+
 
     //UserDetailService方法重写
     @Override

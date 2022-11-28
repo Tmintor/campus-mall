@@ -2,10 +2,13 @@ spring:
   application:
     name: mall-user
   profiles:
-    active: prod
+    active: dev
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
+  rabbitmq:
+    host: 139.9.48.23
+    port: 5672
 server:
   servlet:
     context-path: /shop
@@ -15,6 +18,14 @@ aliyun:
     access-keyid: LTAI5tKzcuNvyr8HXizh7XkB
     access-keysecret: 3l95gHC61TRFIXcYaHh6VJWPKXBLmR
     bucketname: devcloud-campus-mall
+
+rabbit:
+  delayed-exchange: delayed-exchange
+  delayed-queue: delayed-queue
+  delayed-routing-key: delayed.routingKey
+  dead-letter-queue: dead-letter-queue
+  dead-letter-exchange: dead-letter-exchange
+  dead-letter-routing-key: dead.letter.routingKey
 secure:
   ignored:
     urls: # 安全路径白名单
@@ -35,5 +46,6 @@ secure:
       - /user/register
       - /goods/list/**
       - /category/list
+      - /oss/**
 mybatis-plus:
   mapper-locations: classpath*:/**/mapper/xml/*.xml

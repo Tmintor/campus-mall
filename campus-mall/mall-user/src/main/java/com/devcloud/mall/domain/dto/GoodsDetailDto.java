@@ -36,13 +36,16 @@ public class GoodsDetailDto {
     @ApiModelProperty(value = "商品名称")
     private String goodsName;
 
+    @ApiModelProperty(value = "商品二级id")
+    private String cateParentId;
+
     @ApiModelProperty(value = "商品价格")
     private BigDecimal price;
 
     @ApiModelProperty(value = "商品描述")
     private String description;
 
-/*    @ApiModelProperty(value = "商家自定义的商品属性")
+/*  @ApiModelProperty(value = "商家自定义的商品属性")
     private List<GoodsAttributes> attributes;*/
 
     @ApiModelProperty(value = "商品图片地址")

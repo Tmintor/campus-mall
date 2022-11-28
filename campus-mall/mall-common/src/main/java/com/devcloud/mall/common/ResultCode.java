@@ -10,5 +10,6 @@ public class ResultCode {
 
     public static final Integer SUCCESS = 20000;
     public static final Integer FAIL = 20001;
+    public static final Integer JWT_ILLEGAL = 20002;
 
 }

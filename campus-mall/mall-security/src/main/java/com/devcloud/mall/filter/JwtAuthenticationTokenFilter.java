@@ -1,5 +1,8 @@
 package com.devcloud.mall.filter;
 
+import com.devcloud.mall.common.ResultCode;
+import com.devcloud.mall.exception.JwtException;
+import com.devcloud.mall.utils.HttpResponseUtil;
 import com.devcloud.mall.utils.JwtUtil;
 import com.devcloud.mall.utils.RedisCache;
 import io.jsonwebtoken.Claims;
@@ -30,10 +33,8 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     @Autowired
     private RedisCache redisCache;
 
-
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-
         String token = request.getHeader("Authorization");
         //token为空则放行，后面还有别的过滤器
         if (!StringUtils.hasText(token)) {
@@ -48,13 +49,15 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             userId = claims.getSubject();
         } catch (Exception e) {
             e.printStackTrace();
-            throw new RuntimeException("token不合法");
+            HttpResponseUtil.error(response, ResultCode.JWT_ILLEGAL, "Token不合法");
+            return;
         }
 
         //从redis获取用户信息
         UserDetails loginUser = redisCache.getCacheObject(userId);
         if (Objects.isNull(loginUser)) {
-            throw new RuntimeException("用户未登录");
+            HttpResponseUtil.error(response, ResultCode.JWT_ILLEGAL, "用户认证已过期");
+            return;
         }
 
         //存入SecurityContextHolder

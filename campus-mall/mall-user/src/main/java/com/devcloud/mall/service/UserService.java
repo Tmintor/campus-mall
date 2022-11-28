@@ -28,4 +28,8 @@ public interface UserService extends IService<User> {
     User getUserInfo(HttpServletRequest request);
 
     User getUserInfoById(String id);
+
+    void modifyUserInfo(User user);
+
+    void updateAvatar(User user);
 }

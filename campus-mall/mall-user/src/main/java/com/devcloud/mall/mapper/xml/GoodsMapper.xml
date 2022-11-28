@@ -10,11 +10,18 @@
         <result property="goodsName" column="name"/>
         <result property="price" column="price"/>
         <result property="description" column="description"/>
-        <result property="attributes" column="attributes" typeHandler="com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler"/>
+        <result property="cateParentId" column="cate_parent_id"/>
+        <!--<result property="attributes" column="attributes" typeHandler="com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler"/>-->
         <result property="image" column="image"/>
         <result property="number" column="number"/>
         <result property="viewCount" column="view_count"/>
     </resultMap>
+
+    <update id="incrGoodsNumber">
+        update goods
+        set number = number + #{number}
+        where id = #{goodsId}
+    </update>
 
     <select id="selectGoodsDetailById" resultMap="GoodsDetailMap">
         select
@@ -25,6 +32,7 @@
             g.name,
             g.price,
             g.description,
+            g.cate_parent_id,
            /* g.attributes,*/
             g.image,
             g.number,
@@ -32,6 +40,24 @@
         from goods g
         join user u on g.user_id = u.id
         where g.id = #{id}
+    </select>
+    <select id="selectGoodsListPage" resultMap="GoodsDetailMap">
+        select
+            g.id,
+            g.user_Id,
+            u.username,
+            u.avatar,
+            g.name,
+            g.price,
+            g.description,
+            g.cate_parent_id,
+            /* g.attributes,*/
+            g.image,
+            g.number,
+            g.view_count
+        from goods g
+        join user u on g.user_id = u.id
+        where g.status = 1
     </select>
 
 </mapper>

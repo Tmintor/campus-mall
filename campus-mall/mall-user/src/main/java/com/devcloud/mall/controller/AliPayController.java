@@ -27,7 +27,7 @@ public class AliPayController {
     private AliPayService aliPayService;
 
     @GetMapping("/pay")
-    public void pay(AliPay aliPay, HttpServletResponse response) throws IOException {
+    public void pay(AliPay aliPay, HttpServletResponse response) throws IOException, AlipayApiException {
         String form = aliPayService.pay(aliPay);
         response.setContentType("text/html;charset=utf-8");
 

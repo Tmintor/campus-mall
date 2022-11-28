@@ -9,8 +9,8 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
  * @author 吴员外
  * @date 2022/10/28 0:34
  */
-//@SpringBootApplication(exclude = SecurityAutoConfiguration.class)
-@SpringBootApplication
+@SpringBootApplication(exclude = SecurityAutoConfiguration.class)
+//@SpringBootApplication
 @MapperScan("com.devcloud.mall.mapper")
 public class MallApplication {
 

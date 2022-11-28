@@ -4,6 +4,7 @@ import com.devcloud.mall.domain.Goods;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.devcloud.mall.domain.dto.GoodsDetailDto;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -30,4 +31,6 @@ public interface GoodsService extends IService<Goods> {
     void changeGoodsInfo(Goods goods);
 
     Map<String, Object> getCategoryGoods(String cid, Integer page, Integer limit);
+
+    List<Goods> getGoodsListByIdList(ArrayList<String> goodsIds);
 }

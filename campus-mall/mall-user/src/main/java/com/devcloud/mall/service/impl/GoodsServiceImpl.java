@@ -10,6 +10,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.devcloud.mall.utils.BeanUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -42,10 +43,8 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 
     @Override
     public Map<String, Object> getGoodsList(Integer current, Integer limit) {
-        Page<Goods> page = new Page<>(current, limit);
-        LambdaQueryWrapper<Goods> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-        lambdaQueryWrapper.eq(Goods::getStatus, 1);
-        baseMapper.selectPage(page, lambdaQueryWrapper);
+        Page<GoodsDetailDto> page = new Page<>(current, limit);
+        baseMapper.selectGoodsListPage(page);
         Map<String, Object> map = BeanUtils.beanToPageMap(page);
         return map;
     }
@@ -76,6 +75,13 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
         lambdaQueryWrapper.eq(Goods::getCateId, cid);
         baseMapper.selectPage(page, lambdaQueryWrapper);
         return BeanUtils.beanToPageMap(page);
+    }
+
+    @Override
+    public List<Goods> getGoodsListByIdList(ArrayList<String> goodsIds) {
+        LambdaQueryWrapper<Goods> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.in(Goods::getId, goodsIds);
+        return baseMapper.selectList(lambdaQueryWrapper);
     }
 
 }

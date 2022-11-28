@@ -1,6 +1,6 @@
 package com.devcloud.mall.mapper;
 
-import com.devcloud.mall.domain.Order;
+import com.devcloud.mall.domain.Orders;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author tminto
  * @since 2022-10-30
  */
-public interface OrderMapper extends BaseMapper<Order> {
+public interface OrderMapper extends BaseMapper<Orders> {
 
 }

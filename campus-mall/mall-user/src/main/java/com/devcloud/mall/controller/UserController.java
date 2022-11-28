@@ -2,6 +2,7 @@ package com.devcloud.mall.controller;
 
 import com.devcloud.mall.common.R;
 import com.devcloud.mall.domain.User;
+import com.devcloud.mall.domain.vo.AvatarVo;
 import com.devcloud.mall.domain.vo.LoginPhoneVo;
 import com.devcloud.mall.domain.vo.RegisterVo;
 import com.devcloud.mall.service.UserService;
@@ -67,6 +68,13 @@ public class UserController {
     @ApiOperation("修改个人信息")
     @PutMapping("/userInfo")
     public R modifyUserInfo(@RequestBody User user) {
+        userService.modifyUserInfo(user);
+        return R.ok();
+    }
+
+    @ApiOperation("修改头像")
+    @PutMapping("/avatar")
+    public R modifyAvatar(@RequestBody User user) {
         userService.updateById(user);
         return R.ok();
     }

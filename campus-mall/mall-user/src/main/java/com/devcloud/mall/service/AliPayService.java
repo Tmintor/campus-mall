@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public interface AliPayService {
 
-    String pay(AliPay aliPay);
+    String pay(AliPay aliPay) throws AlipayApiException;
 
     void payNotify(HttpServletRequest request) throws AlipayApiException;
 }

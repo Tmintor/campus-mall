@@ -31,6 +31,14 @@ public class R implements Serializable {
         return r;
     }
 
+    public static R ok(Integer code) {
+        R r = new R();
+        r.setSuccess(true);
+        r.setCode(code);
+        r.setMessage("成功");
+        return r;
+    }
+
     //失败静态方法
     public static R error() {
         R r = new R();
