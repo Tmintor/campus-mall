@@ -2,5 +2,72 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.devcloud.mall.mapper.OrderMapper">
 
+    <resultMap id="OrderDetailMap" type="com.devcloud.mall.domain.dto.OrderDetailDto">
+        <id property="id" column="id"/>
+        <result property="alipayTraceNo" column="transaction_id"/>
+        <result property="goodsName" column="name"/>
+        <result property="goodsNumber" column="number"/>
+        <result property="goodsImage" column="image"/>
+        <result property="totalAmount" column="money"/>
+        <result property="sellerName" column="username"/>
+        <result property="address" column="address"/>
+        <result property="phone" column="phone"/>
+        <result property="remark" column="remark"/>
+        <result property="status" column="status"/>
+        <result property="createTime" column="create_time"/>
+        <result property="payTime" column="pay_time"/>
+    </resultMap>
 
+    <select id="selectOrderDetail" resultMap="OrderDetailMap">
+        select
+            o.id,
+            t.transaction_id,
+            g.name,
+            g.image,
+            o.number,
+            o.money,
+            u.username,
+            o.address,
+            o.phone,
+            o.remark,
+            o.status,
+            o.create_time,
+            t.create_time as pay_time
+        from orders o
+        left join tran t on o.id = t.order_id
+        join goods g on o.goods_id = g.id
+        join user u on g.user_id = u.id
+        where o.id = #{orderId}
+    </select>
+    <select id="selectMySold" resultType="com.devcloud.mall.domain.dto.OrderListDto">
+        select
+            o.id,
+            g.id as goodsId,
+            g.name as goodsName,
+            u.id as sellerId,
+            u.username as sellerName,
+            u.avatar as sellerAvatar,
+            o.status,
+            o.money
+        from orders o
+        join  goods g on o.goods_id = g.id
+        join  user u on g.user_id = u.id
+        where g.user_id = #{userId}
+    </select>
+
+    <select id="selectMyBuy" resultType="com.devcloud.mall.domain.dto.OrderListDto">
+        select
+            o.id,
+            g.id as goodsId,
+            g.name as goodsName,
+            u.id as sellerId,
+            u.username as sellerName,
+            u.avatar as sellerAvatar,
+            o.status,
+            o.money
+        from orders o
+        join  goods g on o.goods_id = g.id
+        join  user u on g.user_id = u.id
+        where o.customer_id = #{userId}
+    </select>
 </mapper>

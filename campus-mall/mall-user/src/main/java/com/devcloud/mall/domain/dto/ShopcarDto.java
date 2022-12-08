@@ -17,6 +17,8 @@ public class ShopcarDto {
 
     private String avatar;
 
+    private String goodsId;
+
     private String goodsName;
 
     private String goodsImage;

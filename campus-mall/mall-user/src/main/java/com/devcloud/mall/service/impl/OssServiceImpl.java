@@ -11,6 +11,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -31,30 +33,36 @@ public class OssServiceImpl implements OssService {
         // 填写Bucket名称
         String bucketName = AliyunConstant.BUCKET_NAME;
         // 填写Object完整路径，完整路径中不能包含Bucket名称，例如exampledir/exampleobject.txt。
-        String fileName = new DateTime().toString("yyyy/MM/dd")
-                + "/" + UUID.randomUUID().toString().replaceAll("-", "")
-                + multipartFile.getOriginalFilename();
+
+        StringBuilder fileName = new StringBuilder(new DateTime().toString("yyyy/MM/dd"));
+        fileName.append("/")
+                .append(UUID.randomUUID().toString().replaceAll("-", ""))//随机生成文件名
+                .append(".")
+                .append(multipartFile.getOriginalFilename().split("\\.")[1]);//截取文件后缀
 
         OSS ossClient = null;
+        //Map<String, Object> resultMap = new HashMap<>();
         try {
             InputStream file = multipartFile.getInputStream();
             // 创建OSSClient实例。
             ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
             // 创建PutObjectRequest对象。
-            PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, fileName, file);
+            PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, fileName.toString(), file);
             // 上传文件。
             ossClient.putObject(putObjectRequest);
 
-            return "https://"  + bucketName + "." + endpoint + "/" + fileName;
+            //resultMap.put("imageUrl", "https://" + bucketName + "." + endpoint + "/" + fileName);
+            //resultMap.put("imageName", multipartFile.getOriginalFilename());
+
         } catch (IOException e) {
             e.printStackTrace();
+            throw new RuntimeException("上传失败");
         } finally {
             if (ossClient != null) {
                 ossClient.shutdown();
             }
         }
-
-        return null;
+        return "https://"  + bucketName + "." + endpoint + "/" + fileName;
     }
 
 }

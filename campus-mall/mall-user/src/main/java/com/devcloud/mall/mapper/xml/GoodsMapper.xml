@@ -10,6 +10,7 @@
         <result property="goodsName" column="name"/>
         <result property="price" column="price"/>
         <result property="description" column="description"/>
+        <result property="cateId" column="cate_id"/>
         <result property="cateParentId" column="cate_parent_id"/>
         <!--<result property="attributes" column="attributes" typeHandler="com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler"/>-->
         <result property="image" column="image"/>
@@ -32,6 +33,7 @@
             g.name,
             g.price,
             g.description,
+            g.cate_id,
             g.cate_parent_id,
            /* g.attributes,*/
             g.image,
@@ -50,6 +52,7 @@
             g.name,
             g.price,
             g.description,
+            g.cate_id,
             g.cate_parent_id,
             /* g.attributes,*/
             g.image,
@@ -58,6 +61,25 @@
         from goods g
         join user u on g.user_id = u.id
         where g.status = 1
+    </select>
+    <select id="selectGoodsDetailByCateParentId" resultMap="GoodsDetailMap">
+        select
+            g.id,
+            g.user_Id,
+            u.username,
+            u.avatar,
+            g.name,
+            g.price,
+            g.description,
+            g.cate_id,
+            g.cate_parent_id,
+            /* g.attributes,*/
+            g.image,
+            g.number,
+            g.view_count
+        from goods g
+            join user u on g.user_id = u.id
+        where g.cate_id = #{cid}
     </select>
 
 </mapper>

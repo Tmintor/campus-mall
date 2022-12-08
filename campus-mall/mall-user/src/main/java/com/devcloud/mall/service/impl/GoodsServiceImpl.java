@@ -70,10 +70,8 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 
     @Override
     public Map<String, Object> getCategoryGoods(String cid, Integer current, Integer limit) {
-        Page<Goods> page = new Page<>(current, limit);
-        LambdaQueryWrapper<Goods> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-        lambdaQueryWrapper.eq(Goods::getCateId, cid);
-        baseMapper.selectPage(page, lambdaQueryWrapper);
+        Page<GoodsDetailDto> page = new Page<>(current, limit);
+        baseMapper.selectGoodsDetailByCateParentId(page,cid);
         return BeanUtils.beanToPageMap(page);
     }
 

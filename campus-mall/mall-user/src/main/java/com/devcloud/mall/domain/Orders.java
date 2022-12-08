@@ -53,8 +53,17 @@ public class Orders implements Serializable {
     @ApiModelProperty(value = "支付状态，0表示未支付，1表示已支付")
     private Integer status;
 
+    @ApiModelProperty(value = "订单备注")
+    private String remark;
+
+    @ApiModelProperty(value = "收货地址")
+    private String address;
+
+    @ApiModelProperty(value = "收货人电话")
+    private String phone;
+
     @ApiModelProperty(value = "创建时间")
-    @TableField( fill = FieldFill.INSERT)
+    @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 
     @ApiModelProperty(value = "更新时间")

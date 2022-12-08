@@ -22,4 +22,6 @@ public interface GoodsMapper extends BaseMapper<Goods> {
     IPage<GoodsDetailDto> selectGoodsListPage(IPage<GoodsDetailDto> page);
 
     void incrGoodsNumber(@Param("goodsId") String goodsId, @Param("number")Integer number);
+
+    IPage<GoodsDetailDto> selectGoodsDetailByCateParentId(Page<GoodsDetailDto> page, @Param("cid")String cid);
 }

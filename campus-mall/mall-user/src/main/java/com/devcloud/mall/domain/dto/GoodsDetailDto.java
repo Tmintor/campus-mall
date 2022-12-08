@@ -36,6 +36,9 @@ public class GoodsDetailDto {
     @ApiModelProperty(value = "商品名称")
     private String goodsName;
 
+    @ApiModelProperty(value = "商品一级id")
+    private String cateId;
+
     @ApiModelProperty(value = "商品二级id")
     private String cateParentId;
 

@@ -2,7 +2,6 @@ package com.devcloud.mall.controller;
 
 import com.devcloud.mall.common.R;
 import com.devcloud.mall.domain.User;
-import com.devcloud.mall.domain.vo.AvatarVo;
 import com.devcloud.mall.domain.vo.LoginPhoneVo;
 import com.devcloud.mall.domain.vo.RegisterVo;
 import com.devcloud.mall.service.UserService;

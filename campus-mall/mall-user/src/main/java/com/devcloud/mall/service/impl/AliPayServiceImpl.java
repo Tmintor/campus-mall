@@ -103,6 +103,7 @@ public class AliPayServiceImpl implements AliPayService {
 
                 for (String orderId : orderIds) {
                     orders.setId(orderId);
+                    orders.setStatus(1);
                     orderMapper.updateById(orders);
                 }
 
@@ -111,6 +112,7 @@ public class AliPayServiceImpl implements AliPayService {
                 tran.setTradeState(params.get("trade_status"))
                         .setTransactionId(params.get("trade_no"))
                         .setOrderId(params.get("out_trade_no"))
+                        .setSubject(subject)
                         .setTotalAmount(new BigDecimal(params.get("total_amount")))
                         .setCreateTime(DateUtil.parse(params.get("gmt_payment")))
                         .setUpdateTime(DateUtil.parse(params.get("gmt_payment")));

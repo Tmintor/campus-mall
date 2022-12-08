@@ -27,5 +27,4 @@ public class OssController {
         return R.ok().data("imageUrl", url);
     }
 
-
 }

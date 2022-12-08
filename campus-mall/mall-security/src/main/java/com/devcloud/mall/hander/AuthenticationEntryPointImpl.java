@@ -1,7 +1,6 @@
 package com.devcloud.mall.hander;
 
 import com.devcloud.mall.utils.HttpResponseUtil;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
