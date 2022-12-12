@@ -3,13 +3,15 @@ package com.devcloud.mall.service.impl;
 import com.alipay.api.AlipayApiException;
 import com.baomidou.mybatisplus.core.toolkit.Sequence;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.devcloud.mall.constant.AliPayConstant;
 import com.devcloud.mall.constant.RabbitConstant;
 import com.devcloud.mall.domain.*;
 import com.devcloud.mall.domain.dto.OrderDetailDto;
-import com.devcloud.mall.domain.dto.OrderListDto;
+import com.devcloud.mall.domain.dto.MyBuyDto;
 import com.devcloud.mall.domain.vo.ConfirmOrderVo;
 import com.devcloud.mall.domain.vo.OrderVo;
 import com.devcloud.mall.exception.AlipayException;
+import com.devcloud.mall.mapper.GoodsMapper;
 import com.devcloud.mall.mapper.OrderMapper;
 import com.devcloud.mall.service.GoodsService;
 import com.devcloud.mall.service.OrderService;
@@ -27,6 +29,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+
 
 /**
  * <p>
@@ -60,6 +63,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Orders> implement
 
     @Autowired
     private Sequence sequence;
+
+    @Autowired
+    private GoodsMapper goodsMapper;
 
     @Override
     @Transactional
@@ -96,13 +102,14 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Orders> implement
             //创建未支付订单
             orders.setId(sequence.nextId() + "");
             orders.setGoodsId(confirmOrder.getGoodsId());
-            orders.setCustomerId(confirmOrder.getSellerId());
+            orders.setCustomerId(orderVo.getUserId());
             orders.setStatus(0);
             orders.setNumber(buyNumber);
             orders.setMoney(price.multiply(new BigDecimal(buyNumber)));
             orders.setRemark(orderVo.getRemark());
             orders.setAddress(orderVo.getAddress());
             orders.setPhone(orderVo.getPhone());
+            orders.setCreateTime(new Date());
             //放入数据库
             orderService.save(orders);
 
@@ -124,15 +131,16 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Orders> implement
         //删除最后一个“_”
         subject.deleteCharAt(subject.lastIndexOf("_"));
         //调用支付宝支付接口
-        aliPay.setTraceNo(orders.getId());
+        aliPay.setTradeNo(orders.getId());
         aliPay.setTotalAmount(totalAmount.doubleValue());
         aliPay.setSubject(subject.toString());
+        aliPay.setExpireTime(new Date(orders.getCreateTime().getTime() + AliPayConstant.EXPIRE_TIME));
         return aliPayService.pay(aliPay);
     }
 
     @Override
     public Map<String, Object> getMySoldList(String userId, Integer current, Integer limit) {
-        Page<OrderListDto> page = new Page<>();
+        Page<MyBuyDto> page = new Page<>(current,limit);
         baseMapper.selectMySold(page,userId);
         return BeanUtils.beanToPageMap(page);
     }
@@ -164,10 +172,40 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Orders> implement
 
     @Override
     public Map<String, Object> getMyBuyList(String userId, Integer current, Integer limit) {
-        Page<OrderListDto> page = new Page<>();
+        Page<MyBuyDto> page = new Page<>(current,limit);
         page = baseMapper.selectMyBuy(page,userId);
         return BeanUtils.beanToPageMap(page);
     }
 
+    @Override
+    @Transactional
+    public void cancelOrder(String orderId) {
+        Orders order = baseMapper.selectById(orderId);
+        Integer status = order.getStatus();
+        //未支付则取消订单
+        if (0 == status) {
+            //设置订单状态
+            order.setStatus(-1);
+            orderService.updateById(order);
+            //解库存
+            String goodsId = order.getGoodsId();
+            goodsMapper.changeGoodsNumber(goodsId, order.getNumber(),new Date());
+        } else {
+            throw new RuntimeException("取消订单错误，请刷新界面后重试");
+        }
+    }
 
+    @Override
+    public void confirmReceipt(String orderId) {
+        Orders order = new Orders();
+        order.setId(orderId);
+        Orders orders = baseMapper.selectById(order);
+        if (orders.getStatus() == 1){
+            order.setStatus(2);
+            baseMapper.updateById(order);
+        } else {
+            throw new RuntimeException("确定收货错误，请刷新后再试");
+        }
+        //TODO 将钱转给卖家
+    }
 }

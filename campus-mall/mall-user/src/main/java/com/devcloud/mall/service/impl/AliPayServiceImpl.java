@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,6 +30,7 @@ import java.util.Map;
  */
 @Service
 public class AliPayServiceImpl implements AliPayService {
+
 
     @Autowired
     private OrderMapper orderMapper;
@@ -52,10 +54,11 @@ public class AliPayServiceImpl implements AliPayService {
         AlipayTradePagePayRequest request = new AlipayTradePagePayRequest();  // 发送请求的 Request类
         request.setNotifyUrl(AliPayConstant.NOTIFY_URL);
         JSONObject bizContent = new JSONObject();
-        bizContent.set("out_trade_no", aliPay.getTraceNo());  // 我们自己生成的订单编号
+        bizContent.set("out_trade_no", aliPay.getTradeNo());  // 我们自己生成的订单编号
         bizContent.set("total_amount", aliPay.getTotalAmount()); // 订单的总金额
         bizContent.set("subject", aliPay.getSubject());   // 支付的名称
         bizContent.set("product_code", "FAST_INSTANT_TRADE_PAY");  // 固定配置
+        bizContent.set("time_expire",DateUtil.format(aliPay.getExpireTime(),"yyyy-MM-dd HH:mm:ss"));//绝对过期时间
         request.setBizContent(bizContent.toString());
 
         // 执行请求，拿到响应的结果，返回给浏览器

@@ -29,4 +29,8 @@ public interface OrderService extends IService<Orders> {
     OrderDetailDto getOrderDetail(String orderId);
 
     Map<String, Object> getMyBuyList(String userId, Integer page, Integer limit);
+
+    void cancelOrder(String orderId);
+
+    void confirmReceipt(String orderId);
 }

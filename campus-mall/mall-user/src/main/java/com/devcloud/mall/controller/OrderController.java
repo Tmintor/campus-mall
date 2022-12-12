@@ -1,9 +1,9 @@
 package com.devcloud.mall.controller;
 
-
 import com.alipay.api.AlipayApiException;
 import com.devcloud.mall.common.R;
 import com.devcloud.mall.domain.ConfirmOrder;
+import com.devcloud.mall.domain.Orders;
 import com.devcloud.mall.domain.dto.OrderDetailDto;
 import com.devcloud.mall.domain.vo.ConfirmOrderVo;
 import com.devcloud.mall.domain.vo.OrderVo;
@@ -30,7 +30,7 @@ public class OrderController {
     @PostMapping("/confirm")
     public R createConfirmOrder(@RequestBody ConfirmOrderVo[] confirmOrders) {
         List<ConfirmOrder> list = orderService.createConfirmOrder(confirmOrders);
-        return R.ok().data("confirmOrderList",list);
+        return R.ok().data("confirmOrderList", list);
     }
 
     @ApiOperation("生成订单")
@@ -56,15 +56,36 @@ public class OrderController {
         return R.ok().data(map);
     }
 
-
     @ApiOperation("我买到的")
     @GetMapping("/buy/list/{userId}/{page}/{limit}")
     public R getMyBuyList(@PathVariable String userId,
                           @PathVariable Integer page,
                           @PathVariable Integer limit) {
-        Map<String, Object> map = orderService.getMyBuyList(userId,page,limit);
+        Map<String, Object> map = orderService.getMyBuyList(userId, page, limit);
         return R.ok().data(map);
     }
-    
+
+    @ApiOperation("取消订单")
+    @PutMapping("/{orderId}")
+    public R cancelOrder(@PathVariable String orderId) {
+        orderService.cancelOrder(orderId);
+        return R.ok();
+    }
+
+    @ApiOperation("删除订单")
+    @DeleteMapping("/{orderId}")
+    public R deleteOrder(@PathVariable String orderId) {
+        orderService.removeById(orderId);
+        return R.ok();
+    }
+
+    //TODO
+    @ApiOperation("确定收货")
+    @PostMapping("/delivery")
+    public R confirmReceipt(@RequestBody Orders orders) {
+        orderService.confirmReceipt(orders.getId());
+        return R.ok();
+    }
+
 }
 

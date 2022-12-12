@@ -41,7 +41,6 @@
 <!--            <groupId>com.baomidou</groupId>-->
 <!--            <artifactId>mybatis-plus-generator</artifactId>-->
 <!--        </dependency>-->
-
         <!--mysql-->
         <dependency>
             <groupId>mysql</groupId>

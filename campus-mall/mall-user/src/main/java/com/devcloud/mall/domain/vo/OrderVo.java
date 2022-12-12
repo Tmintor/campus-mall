@@ -11,6 +11,8 @@ public class OrderVo {
 
     private String confirmOrderId;
 
+    private String userId;
+
     private String remark;
 
     private String address;

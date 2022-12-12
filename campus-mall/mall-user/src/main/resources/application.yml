@@ -47,5 +47,6 @@ secure:
       - /goods/list/**
       - /category/list
       - /oss/**
+      - /alipay/notify
 mybatis-plus:
   mapper-locations: classpath*:/**/mapper/xml/*.xml

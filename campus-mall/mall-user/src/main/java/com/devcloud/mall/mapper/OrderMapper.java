@@ -3,8 +3,9 @@ package com.devcloud.mall.mapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.devcloud.mall.domain.Orders;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.devcloud.mall.domain.dto.MySoldDto;
 import com.devcloud.mall.domain.dto.OrderDetailDto;
-import com.devcloud.mall.domain.dto.OrderListDto;
+import com.devcloud.mall.domain.dto.MyBuyDto;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -19,7 +20,7 @@ public interface OrderMapper extends BaseMapper<Orders> {
 
     OrderDetailDto selectOrderDetail(String orderId);
 
-    Page<OrderListDto> selectMySold(Page<OrderListDto> page, @Param("userId") String userId);
+    Page<MySoldDto> selectMySold(Page<MyBuyDto> page, @Param("userId") String userId);
 
-    Page<OrderListDto> selectMyBuy(Page<OrderListDto> page, String userId);
+    Page<MyBuyDto> selectMyBuy(Page<MyBuyDto> page, String userId);
 }

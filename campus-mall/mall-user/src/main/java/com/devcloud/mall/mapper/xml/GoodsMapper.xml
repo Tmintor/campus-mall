@@ -18,11 +18,13 @@
         <result property="viewCount" column="view_count"/>
     </resultMap>
 
-    <update id="incrGoodsNumber">
+    <update id="changeGoodsNumber">
         update goods
-        set number = number + #{number}
+        set number = number + #{number},
+            update_time = #{updateTime}
         where id = #{goodsId}
     </update>
+
 
     <select id="selectGoodsDetailById" resultMap="GoodsDetailMap">
         select

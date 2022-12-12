@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -41,7 +42,7 @@ public class RabbitMQListener {
             orders.setStatus(-1);
             orderMapper.updateById(orders);
             //解库存
-            goodsMapper.incrGoodsNumber(orders.getGoodsId(), orders.getNumber());
+            goodsMapper.changeGoodsNumber(orders.getGoodsId(), orders.getNumber(),new Date());
         }
     }
 }

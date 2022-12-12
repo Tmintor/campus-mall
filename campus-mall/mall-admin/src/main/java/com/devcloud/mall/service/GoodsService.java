@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.devcloud.mall.domain.Goods;
 import com.devcloud.mall.domain.vo.GoodsQuery;
 
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -21,4 +23,6 @@ public interface GoodsService extends IService<Goods> {
     Goods getGoodsInfo(String id);
 
     void checkGoods(Goods goods);
+
+    Integer getGoodsPublishNumByDay(Date date);
 }

@@ -11,10 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * <p>
- * 前端控制器
- * </p>
- *
  * @author tminto
  * @since 2022-11-01
  */
@@ -31,7 +27,6 @@ public class CategoryController {
         List<CategoryParentDto> list = categoryService.getAllCategory();
         return R.ok().data("categoryList", list);
     }
-
 
 }
 

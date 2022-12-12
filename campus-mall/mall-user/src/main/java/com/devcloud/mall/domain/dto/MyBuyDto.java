@@ -7,10 +7,10 @@ import java.math.BigDecimal;
 /**
  * @author 吴员外
  * @date 2022/12/6 23:17
- *  展示我卖出的和我买到的
+ *  展示我买到的
  */
 @Data
-public class OrderListDto {
+public class MyBuyDto {
 
     private String id;
 

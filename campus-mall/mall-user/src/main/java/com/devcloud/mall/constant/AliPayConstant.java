@@ -15,6 +15,7 @@ public class AliPayConstant {
     public static String ALIPAY_PUBLIC_KEY;
     public static String NOTIFY_URL;
     public static String GATEWAY_URL;
+    public static final long EXPIRE_TIME = 1000 * 60 * 30;
 
     public void setAppId(String appId) {
         AliPayConstant.APP_ID = appId;

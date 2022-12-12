@@ -28,8 +28,6 @@
 //        gc.setAuthor("tminto");
 //        gc.setOpen(false); //生成后是否打开资源管理器
 //        gc.setFileOverride(false); //重新生成时文件是否覆盖
-//         * mp生成service层代码，默认接口名称第一个字母有 I
-//         *
 //
 //        gc.setServiceName("%sService");    //去掉Service接口的首字母I
 //        gc.setIdType(IdType.ASSIGN_ID); //主键策略
@@ -59,7 +57,7 @@
 //
 //        // 5、策略配置
 //        StrategyConfig strategy = new StrategyConfig();
-//        strategy.setInclude("category");
+//        strategy.setInclude("orders");
 //        strategy.setNaming(NamingStrategy.underline_to_camel);//数据库表映射到实体的命名策略
 //        strategy.setTablePrefix("t_"); //生成实体时去掉表前缀
 //

@@ -65,6 +65,9 @@ public class User implements Serializable {
     @ApiModelProperty(value = "学校")
     private String school;
 
+    @ApiModelProperty(value = "收货地址")
+    private String address;
+
     @ApiModelProperty(value = "是否被禁用")
     private Integer isActive;
 

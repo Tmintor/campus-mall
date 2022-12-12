@@ -12,8 +12,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
  * @author 吴员外
  * @date 2022/10/25 16:29
  */
-@SpringBootApplication(exclude = SecurityAutoConfiguration.class)
-//@SpringBootApplication
+//@SpringBootApplication(exclude = SecurityAutoConfiguration.class)
+@SpringBootApplication
 @MapperScan("com.devcloud.mall.mapper")
 public class AdminApplication {
 

@@ -39,27 +39,30 @@
         join user u on g.user_id = u.id
         where o.id = #{orderId}
     </select>
-    <select id="selectMySold" resultType="com.devcloud.mall.domain.dto.OrderListDto">
+
+    <select id="selectMySold" resultType="com.devcloud.mall.domain.dto.MySoldDto">
         select
             o.id,
             g.id as goodsId,
             g.name as goodsName,
-            u.id as sellerId,
-            u.username as sellerName,
-            u.avatar as sellerAvatar,
+            g.image as goodsImage,
+            u.id as customerId,
+            u.username as customerName,
+            u.avatar as customerAvatar,
             o.status,
             o.money
         from orders o
         join  goods g on o.goods_id = g.id
-        join  user u on g.user_id = u.id
+        join  user u on o.customer_id = u.id
         where g.user_id = #{userId}
     </select>
 
-    <select id="selectMyBuy" resultType="com.devcloud.mall.domain.dto.OrderListDto">
+    <select id="selectMyBuy" resultType="com.devcloud.mall.domain.dto.MyBuyDto">
         select
             o.id,
             g.id as goodsId,
             g.name as goodsName,
+            g.image as goodsImage,
             u.id as sellerId,
             u.username as sellerName,
             u.avatar as sellerAvatar,
