@@ -48,8 +48,8 @@ public class GoodsDetailDto {
     @ApiModelProperty(value = "商品描述")
     private String description;
 
-/*  @ApiModelProperty(value = "商家自定义的商品属性")
-    private List<GoodsAttributes> attributes;*/
+    @ApiModelProperty(value = "商家自定义的商品属性")
+    private List<GoodsAttributes> attributes;
 
     @ApiModelProperty(value = "商品图片地址")
     private String image;

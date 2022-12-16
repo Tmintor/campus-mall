@@ -20,7 +20,7 @@ public interface GoodsService extends IService<Goods> {
 
     void publishGoods(Goods goods);
 
-    List<Goods> getPublishGoods(String userId);
+    Map<String,Object> getPublishGoods(String userId,Integer page,Integer limit);
 
     Map<String, Object> getGoodsList(Integer page, Integer limit);
 

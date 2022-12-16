@@ -35,10 +35,12 @@ public class GoodsController {
     }
 
     @ApiOperation("查看已发布商品")
-    @GetMapping("/publish/{userId}")
-    public R getPublishGoods(@PathVariable String userId) {
-        List<Goods> goodsList = goodsService.getPublishGoods(userId);
-        return R.ok().data("publishList", goodsList);
+    @GetMapping("/publish/{userId}/{page}/{limit}")
+    public R getPublishGoods(@PathVariable String userId,
+                             @PathVariable Integer page,
+                             @PathVariable Integer limit) {
+        Map<String,Object> map = goodsService.getPublishGoods(userId,page,limit);
+        return R.ok().data(map);
     }
 
     @ApiOperation("商品列表")

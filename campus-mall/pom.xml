@@ -39,7 +39,6 @@
         <velocity.version>2.0</velocity.version>
         <mybatis-plus-generator.version>3.3.0</mybatis-plus-generator.version>
         <redis.version>2.5.0</redis.version>
-        <rabbitmq-version></rabbitmq-version>
     </properties>
 
     <dependencyManagement>

@@ -3,6 +3,7 @@ package com.devcloud.mall.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * @author 吴员外
@@ -20,6 +21,8 @@ public class ConfirmOrder {
     private String goodsName;
 
     private String goodsImage;
+
+    private List<GoodsAttributes> attributes;
 
     private String sellerId;
 

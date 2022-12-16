@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * <p>
@@ -30,4 +31,6 @@ public interface GoodsMapper extends BaseMapper<Goods> {
                            @Param("updateTime") Date updateTime);
 
     IPage<GoodsDetailDto> selectGoodsDetailByCateParentId(Page<GoodsDetailDto> page, @Param("cid")String cid);
+
+    Page<Goods> selectPublishGoods(Page<Goods> page, @Param("userId")String userId);
 }

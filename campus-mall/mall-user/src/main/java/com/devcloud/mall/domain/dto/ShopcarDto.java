@@ -1,6 +1,10 @@
 package com.devcloud.mall.domain.dto;
 
+import com.devcloud.mall.domain.Goods;
+import com.devcloud.mall.domain.GoodsAttributes;
 import lombok.Data;
+
+import java.util.List;
 
 /**
  * @author 吴员外
@@ -25,7 +29,7 @@ public class ShopcarDto {
 
     private String status;
 
-    //private String attribute;
+    private List<GoodsAttributes> attributes;
 
     private double price;
 

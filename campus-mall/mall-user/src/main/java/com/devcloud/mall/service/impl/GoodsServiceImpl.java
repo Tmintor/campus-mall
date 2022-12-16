@@ -34,11 +34,11 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
     }
 
     @Override
-    public List<Goods> getPublishGoods(String userId) {
-        LambdaQueryWrapper<Goods> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(Goods::getUserId, userId)
-                .orderByDesc(Goods::getCreateTime);
-        return baseMapper.selectList(queryWrapper);
+    public Map<String,Object> getPublishGoods(String userId,Integer current,Integer limit) {
+        Page<Goods> page = new Page<>(current,limit);
+        baseMapper.selectPublishGoods(page,userId);
+        Map<String, Object> map = BeanUtils.beanToPageMap(page);
+        return map;
     }
 
     @Override

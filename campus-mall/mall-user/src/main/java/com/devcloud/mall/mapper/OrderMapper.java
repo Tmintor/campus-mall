@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.devcloud.mall.domain.dto.MySoldDto;
 import com.devcloud.mall.domain.dto.OrderDetailDto;
 import com.devcloud.mall.domain.dto.MyBuyDto;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -16,6 +17,7 @@ import org.apache.ibatis.annotations.Param;
  * @author tminto
  * @since 2022-10-30
  */
+@Mapper
 public interface OrderMapper extends BaseMapper<Orders> {
 
     OrderDetailDto selectOrderDetail(String orderId);
