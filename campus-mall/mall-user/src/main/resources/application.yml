@@ -14,10 +14,10 @@ server:
     context-path: /shop
 aliyun:
   oss:
-    endpoint: oss-cn-guangzhou.aliyuncs.com
-    access-keyid: LTAI5tKzcuNvyr8HXizh7XkB
-    access-keysecret: 3l95gHC61TRFIXcYaHh6VJWPKXBLmR
-    bucketname: devcloud-campus-mall
+    endpoint: xxx
+    access-keyid: xxx
+    access-keysecret: xxx
+    bucketname: xxx
 
 rabbit:
   delayed-exchange: delayed-exchange
